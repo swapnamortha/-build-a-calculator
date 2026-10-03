@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Simple Calculator</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #111;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Calculator Box */
+        .calculator {
+            background: #222;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Display */
+        #display {
+            width: 100%;
+            height: 60px;
+            border: none;
+            border-radius: 10px;
+            background: #333;
+            color: white;
+            font-size: 30px;
+            text-align: right;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        /* Buttons Grid */
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 70px);
+            gap: 10px;
+        }
+
+        /* Buttons */
+        button {
+            height: 60px;
+            border: none;
+            border-radius: 10px;
+            background: #444;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #555;
+        }
+
+        /* Operator Buttons */
+        button.operator {
+            background: #ff9500;
+        }
+
+        button.operator:hover {
+            background: #e68900;
+        }
+
+        /* Zero Button */
+        button.zero {
+            grid-column: span 2;
+        }
+
+        /* Equal Button */
+        button.equal {
+            background: #ff9500;
+        }
+
+        button.equal:hover {
+            background: #e68900;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="calculator">
+
+        <!-- Display -->
+        <input type="text" id="display" value="0" disabled>
+
+        <!-- Buttons -->
+        <div class="buttons">
+
+            <button onclick="clearDisplay()">C</button>
+
+            <button onclick="backspace()">⌫</button>
+
+            <button onclick="append('%')">%</button>
+
+            <button class="operator" onclick="append('/')">/</button>
+
+
+            <button onclick="append('7')">7</button>
+
+            <button onclick="append('8')">8</button>
+
+            <button onclick="append('9')">9</button>
+
+            <button class="operator" onclick="append('*')">×</button>
+
+
+            <button onclick="append('4')">4</button>
+
+            <button onclick="append('5')">5</button>
+
+            <button onclick="append('6')">6</button>
+
+            <button class="operator" onclick="append('-')">−</button>
+
+
+            <button onclick="append('1')">1</button>
+
+            <button onclick="append('2')">2</button>
+
+            <button onclick="append('3')">3</button>
+
+            <button class="operator" onclick="append('+')">+</button>
+
+
+            <button class="zero" onclick="append('0')">0</button>
+
+            <button onclick="append('.')">.</button>
+
+            <button class="equal" onclick="calculate()">=</button>
+
+        </div>
+    </div>
+
+
+    <script>
+
+        // Get display
+        let display = document.getElementById("display");
+
+
+        // Add clicked value to display
+        function append(value) {
+
+            if (display.value === "0") {
+                display.value = value;
+            }
+            else {
+                display.value += value;
+            }
+        }
+
+
+        // Clear display
+        function clearDisplay() {
+            display.value = "0";
+        }
+
+
+        // Remove last character
+        function backspace() {
+
+            display.value = display.value.slice(0, -1);
+
+            if (display.value === "") {
+                display.value = "0";
+            }
+        }
+
+
+        // Calculate result
+        function calculate() {
+
+            try {
+
+                display.value = eval(display.value);
+
+            }
+            catch (error) {
+
+                display.value = "Error";
+
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
